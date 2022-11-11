@@ -49,7 +49,7 @@ for param in (" ".join(sys.argv[1:None])).split("--"):
         georeference = 'true' if paramvalue.lower() == 'yes' else 'false'
     
     if (paramname == "s2bands"):
-        s2bands = paramvalue.upper().split(",")
+        s2bands = paramvalue.upper()
 
 isFile = os.path.isfile(pathtoupload)
 payload["s2date"] = date
