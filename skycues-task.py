@@ -47,6 +47,9 @@ for param in (" ".join(sys.argv[1:None])).split("--"):
     
     if (paramname == "georeference"):
         georeference = 'true' if paramvalue.lower() == 'yes' else 'false'
+    
+    if (paramname == "s2bands"):
+        s2bands = paramvalue.upper().split(",")
 
 isFile = os.path.isfile(pathtoupload)
 payload["s2date"] = date
@@ -54,7 +57,14 @@ payload["clouds"] = clouds
 payload["nir_band"] = nirband
 payload["merge_tiles"] = mergetiles
 payload["geo_reference"] = georeference
-payload["mode"] = "v0" if mode == "textures" else "v1"
+payload["s2bands"] = s2bands
+if mode == "textures":
+    payload["mode"] = "v0"
+if mode == "details":
+    payload["mode"] = "v1"
+if mode == "1m":
+    payload["mode"] = "v2"
+
 
 def checkRequest(method, url, data = None):
     try:
